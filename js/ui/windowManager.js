@@ -770,56 +770,18 @@ WindowManager.prototype = {
     },
 
     actionMoveWorkspaceLeft: function() {
-        let rtl = (St.Widget.get_default_direction() == St.TextDirection.RTL);
-        let activeWorkspaceIndex = global.screen.get_active_workspace_index();
-        let indexToActivate = activeWorkspaceIndex;
-        if (rtl && activeWorkspaceIndex < global.screen.n_workspaces - 1)
-            indexToActivate++;
-        else if (!rtl && activeWorkspaceIndex > 0)
-            indexToActivate--;
-        else if (rtl && activeWorkspaceIndex == global.screen.n_workspaces - 1)
-            indexToActivate = 0;
-        else if (!rtl && activeWorkspaceIndex == 0)
-            indexToActivate = global.screen.n_workspaces - 1;
-
-        if (indexToActivate != activeWorkspaceIndex)
-            global.screen.get_workspace_by_index(indexToActivate).activate(global.get_current_time());        
+        global.screen.get_active_workspace().get_neighbor(Meta.MotionDirection.LEFT).activate(global.get_current_time());
     },
 
     actionMoveWorkspaceRight: function() {
-        let rtl = (St.Widget.get_default_direction() == St.TextDirection.RTL);
-        let activeWorkspaceIndex = global.screen.get_active_workspace_index();
-        let indexToActivate = activeWorkspaceIndex;
-        if (rtl && activeWorkspaceIndex > 0)
-            indexToActivate--;
-        else if (!rtl && activeWorkspaceIndex < global.screen.n_workspaces - 1)
-            indexToActivate++;
-        else if (rtl && activeWorkspaceIndex == 0)
-            indexToActivate = global.screen.n_workspaces - 1;
-        else if (!rtl && activeWorkspaceIndex == global.screen.n_workspaces - 1)
-            indexToActivate = 0;
-
-        if (indexToActivate != activeWorkspaceIndex)
-            global.screen.get_workspace_by_index(indexToActivate).activate(global.get_current_time());        
+        global.screen.get_active_workspace().get_neighbor(Meta.MotionDirection.RIGHT).activate(global.get_current_time());
     },
 
     actionMoveWorkspaceUp: function() {
-        let activeWorkspaceIndex = global.screen.get_active_workspace_index();
-        let indexToActivate = activeWorkspaceIndex;
-        if (activeWorkspaceIndex > 0)
-            indexToActivate--;
-
-        if (indexToActivate != activeWorkspaceIndex)
-            global.screen.get_workspace_by_index(indexToActivate).activate(global.get_current_time());        
+        global.screen.get_active_workspace().get_neighbor(Meta.MotionDirection.UP).activate(global.get_current_time());
     },
 
     actionMoveWorkspaceDown: function() {
-        let activeWorkspaceIndex = global.screen.get_active_workspace_index();
-        let indexToActivate = activeWorkspaceIndex;
-        if (activeWorkspaceIndex < global.screen.n_workspaces - 1)
-            indexToActivate++;
-
-        if (indexToActivate != activeWorkspaceIndex)
-            global.screen.get_workspace_by_index(indexToActivate).activate(global.get_current_time());        
+        global.screen.get_active_workspace().get_neighbor(Meta.MotionDirection.DOWN).activate(global.get_current_time());
     }
 };
